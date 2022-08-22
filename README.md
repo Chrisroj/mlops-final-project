@@ -31,6 +31,49 @@ Source: [Kaggle Dataset](https://www.kaggle.com/datasets/blastchar/telco-custome
 
 ## Setup
 
+In order to reproduce the project you need to create and connect to a EC2 instance, follow the next steps:
+
+1. **Create EC2 instance:**
+
+    Go to EC2 service and click in launch instance(orange button), now config the VM as:
+    - Name: `mlops-zoomcamp`
+    - Amazon Machine Image: `Ubuntu Server 22.04 LTS (HVM), SSD Volume Type`
+    - Architecture: `64-bit (x86)`
+    - Instance type: `t2.large`    
+    - Create and select a key pair:   
+        - Key pair name: `asus-laptop`
+        - Key pair type: `RSA`
+        - Private key file format: `.pem`
+    - Configure Storage: `1x 30 Gib gp2 Root Volume`.HOLI
+        
+
+2. **Copy and paste `.pem` file:** 
+
+    When you create a key pair a `.pem` will downloaded automatically, you will have to copy and paste this file to your  `~/.ssh` directory in your local machine.
+    
+    
+3. **Connect to VM Instance:** 
+
+    Start the instance and go to `~./.ssh` directory and locate the `config` file type nano `~/.ssh/config` copy and paste:
+    
+    ```bash
+    Host mlops-zoomcamp
+        HostName EXTERNAL_IP
+        User USER
+        IdentityFile KEY_FILENAME_DIRECTORY
+        LocalForward 8888 localhost:8888
+        LocalForward 5000 127.0.0.1:5000
+        LocalForward 3000 0.0.0.0:3000
+    ```
+
+    Just change the `EXTERNAL_IP`, `USER` and `KEY_FILENAME_DIRECTORY` with your variables.
+    
+Now you can type `ssh mlops-zoomcamp` in your console and you'll get connected to the VM.
+
+
+
+
+
 
 
 
