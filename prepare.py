@@ -7,7 +7,7 @@ RANDOM_STATE = 12354
 
 data_folder = os.path.join(os.getcwd(), "0. data")
 eda_folder = os.path.join(os.getcwd(), "1. eda_and_modeling", "data")
-datasets_evidently_folder = os.path.join(os.getcwd(), "3. monitoring", "evidently_service", "datasets")
+datasets_evidently_folder = os.path.join(os.getcwd(), "2. monitoring_service", "evidently_service", "datasets")
 data_file_path = os.path.join(data_folder, "WA_Fn-UseC_-Telco-Customer-Churn.csv")
 
 data = pd.read_csv(data_file_path)
@@ -24,4 +24,4 @@ train_set.to_csv(os.path.join(eda_folder, "train_set.csv"), index = False, encod
 test_set.to_csv(os.path.join(datasets_evidently_folder, "train_set.csv"), index = False, encoding = "utf-8")
 print("Saving Test Set...")
 test_set.to_csv(os.path.join(eda_folder, "test_set.csv"), index = False, encoding = "utf-8")
-test_set.to_csv(os.path.join(os.getcwd(), "3. monitoring", "test_set.csv"), index = False, encoding = "utf-8")
+test_set.to_csv(os.path.join(os.getcwd(), "2. monitoring_service", "test_set.csv"), index = False, encoding = "utf-8")

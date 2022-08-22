@@ -8,7 +8,15 @@ Source: [Churn Prediction](https://www.analyticsvidhya.com/blog/2021/08/churn-pr
 
 Predict customers behavior is important to retain customers, then the idea of this project is to build a system to predict the customer churn in the telco market(customers have signed up for: phone, internet, treaming TV, etc.) to help telco companies to detect customers with potential churn and take right decisions to retain them.
 
-To do that, in this project a classification model for churn is built, deployed and monitored.
+To do that, in this project a classification model for churn is built, deployed and monitored. 
+
+**Goals:**
+
+- Build a churn model with the "best" **accuracy**.
+- Tracking model experiment with MLflow and using the registry.
+- Monitor data drift with evidently and grafana integration.
+- Use the cloud to develop the project.
+- 
 
 ## Data Source
 Each row represents a customer, each column contains customer’s attributes described on the column Metadata.
@@ -27,7 +35,7 @@ Source: [Kaggle Dataset](https://www.kaggle.com/datasets/blastchar/telco-custome
 - Containerization - [**Docker**](https://www.docker.com) and [**Docker Compose**](https://docs.docker.com/compose/)
 - Pre-Load Transformation - [**pandas**](https://pandas.pydata.org/)
 - Model Development, Experiment Tracking, and Registration - [**scikit-learn**](https://scikit-learn.org/) and [**MLflow**](https://www.mlflow.org/)
-- Model Monitoring - [**Evidently AI**](https://evidentlyai.com/)
+- Model Monitoring - [**Evidently AI**](https://evidentlyai.com/), [**Grafana**](https://grafana.com/) and [**Prometheus**](https://prometheus.io/)
 
 ## Setup
 
@@ -78,25 +86,84 @@ Clone this repository inside EC2 instance:
 git clone https://github.com/Chrisroj/mlops-final-project.git
 ```
 
+### Install miniconda 
+The following snippet will create a directory to install miniconda into, download the latest python 3 based install script for Linux 64 bit, run the install script, delete the install script, then add a conda initialize to your bash or zsh shell. After doing this you can restart your shell and conda will be ready to go.
 
+```bash
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+~/miniconda3/bin/conda init bash
+~/miniconda3/bin/conda init zsh
+```
 
+### Create a conda envinronment
+Go to [1. eda_and_modeling](./1.%20eda_and_modeling/) directory and create a conda environment using the [environment.uml](./1.%20eda_and_modeling/environment.yml) typing:
 
+```bash
+conda env create -f environment.yml
+```
+
+It will create a conda environment named `churn-env`, activate the environment:
+
+```bash
+conda activate churn-env
+```
+
+### Prepare Data
+
+Now go back to the folder root of the project where [prepare.py](./prepare.py) is located and run it:
+
+```bash
+python prepare.py
+```
+
+It will split the [churn data](./0.%20data/WA_Fn-UseC_-Telco-Customer-Churn.csv) into `train_set` and `test_set` and save them in their respective directories with the next objectives:
+
+- `train_set`: Train the classification model and use it as `reference_file` for the evidently service.
+
+- `test_set`: To calculate accuracy for the model and to use it for sending to the evidently service for simulate a productive environment and to monitor the data drift.
+
+## Reproduce EDA and Modeling Phase
+
+Go to the [1. eda_and_modeling](./1.%20eda_and_modeling/) directory open jupyter lab:
+
+```bash
+jupyter lab
+```
+
+Run the [exploratory_data_analysis](./1.%20eda_and_modeling/exploratory_data_analysis.ipynb) notebook:
+
+- We identify empty strings in `TotalCharges` then they were replaced with "0" and after change strings to float data type.
+
+- We identify that the target is a string then we have to change it to a numerica value.
+
+Now type in the terminal(in the [1. eda_and_modeling](./1.%20eda_and_modeling/) directory):
+```bash
+mlflow ui --backend-store-uri sqlite:///mlflow.db
+```
+And run the [trainning_churn_model](./1.%20eda_and_modeling/trainning_churn_model.ipynb). This notebook build a scikit-learn pipeline to train a Random Forest Classfier and uses MLflow to track the experiments and register the best model, go to [localhost:5000](localhost:5000) to see all the runs in MLflow:
+
+![mlflow](./images/mlflow_runs.PNG)
+
+You can check the registered models too:
+
+![mlflow](./images/mlflow_register.PNG)
+
+In the last run it can be seen the accuracy in the test set:
+
+- **accuracy test set:** 0.808
+
+## Reproduce Monitoring Service
 
 
 
 # Hacer instrucciones hasta para instalar jupyter
 
-en el eda hay un churn report
-The environment.yml will create and churn-env
 
-# Primero
-mlflow ui --backend-store-uri sqlite:///mlflow.db
-y despues el tranining notebook
-
-cuando corra de nuevo ver que el performance del modelo es el mismo
 borrar mlruns y mldb
 
-conda environtment to phase 1 and for prepare phase
 
 
 Cosas a mejorar:
@@ -106,3 +173,7 @@ Cosas a mejorar:
 - Usar terraform
 
 # Que mi proximo sea de predicción de bicis de la cdmx
+phase1-> results
+phase2-> results
+
+poner table of contents
