@@ -41,7 +41,7 @@ In order to reproduce the project you need to create and connect to a EC2 instan
     - Architecture: `64-bit (x86)`
     - Instance type: `t2.large`    
     - Create or select a key pair `.pem`
-    - Configure Storage: `1x 30 Gib gp2 Root Volume`.HOLI
+    - Configure Storage: `1x 30 Gib gp2 Root Volume`.
         
 
 2. **Copy and paste `.pem` file:** 
