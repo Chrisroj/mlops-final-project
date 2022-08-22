@@ -40,10 +40,7 @@ In order to reproduce the project you need to create and connect to a EC2 instan
     - Amazon Machine Image: `Ubuntu Server 22.04 LTS (HVM), SSD Volume Type`
     - Architecture: `64-bit (x86)`
     - Instance type: `t2.large`    
-    - Create and select a key pair:   
-        - Key pair name: `asus-laptop`
-        - Key pair type: `RSA`
-        - Private key file format: `.pem`
+    - Create and select a key pair `.pem`
     - Configure Storage: `1x 30 Gib gp2 Root Volume`.HOLI
         
 
