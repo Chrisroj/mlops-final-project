@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+requests = "*"
+imbalanced-learn = "*"
+pandas = "*"
+gunicorn = "*"
+dataclasses = "==0.6"
+werkzeug = "~=2.0.1"
+prometheus-client = "~=0.11.0"
+pyyaml = "~=5.4.1"
+evidently = "*"
+pymongo = "*"
+
+[dev-packages]
+requests = "*"
+
+[requires]
+python_version = "3.10"

@@ -1,0 +1,37 @@
+datasets:
+  customer:
+    column_mapping:
+      categorical_features:
+        - 'gender'
+        - 'Partner'
+        - 'Dependents'
+        - 'PhoneService'
+        - 'MultipleLines'
+        - 'InternetService'
+        - 'OnlineSecurity'
+        - 'OnlineBackup'
+        - 'DeviceProtection'
+        - 'TechSupport'
+        - 'StreamingTV'
+        - 'StreamingMovies'
+        - 'Contract'
+        - 'PaperlessBilling'
+        - 'PaymentMethod'
+        - 'SeniorCitizen'
+      numerical_features:
+        - 'TotalCharges'
+        - 'tenure'
+        - 'MonthlyCharges'
+    data_format:
+      header: true
+      separator: ','
+    monitors:
+      - data_drift
+    reference_file: ./datasets/train_set.csv
+service:
+  calculation_period_sec: 2
+  min_reference_size: 30
+  moving_reference: false
+  datasets_path: datasets
+  use_reference: true
+  window_size: 5
