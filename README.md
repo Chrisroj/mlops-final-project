@@ -31,6 +31,8 @@ Source: [Kaggle Dataset](https://www.kaggle.com/datasets/blastchar/telco-custome
 
 ## Setup
 
+### EC2 Instance
+
 In order to reproduce the project you need to create and connect to a EC2 instance, follow the next steps:
 
 1. **Create EC2 instance:**
@@ -68,7 +70,7 @@ In order to reproduce the project you need to create and connect to a EC2 instan
 Now you can type `ssh mlops-zoomcamp` in your console and you'll get connected to the VM.
 
 
-
+### Clone Repository
 
 
 
