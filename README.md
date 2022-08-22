@@ -72,7 +72,11 @@ Now you can type `ssh mlops-zoomcamp` in your console and you'll get connected t
 
 ### Clone Repository
 
+Clone this repository inside EC2 instance:
 
+```git
+git clone https://github.com/Chrisroj/mlops-final-project.git
+```
 
 
 
