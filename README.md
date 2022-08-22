@@ -125,6 +125,44 @@ It will split the [churn data](./0.%20data/WA_Fn-UseC_-Telco-Customer-Churn.csv)
 
 - `test_set`: To calculate accuracy for the model and to use it for sending to the evidently service for simulate a productive environment and to monitor the data drift.
 
+### Docker
+
+- **Install Docker**:
+
+```bash
+sudo apt update
+sudo apt install docker.io
+```
+
+- **Install Docker Compose**
+
+```bash
+mkdir soft
+cd soft/
+wget https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64 -O docker-compose
+chmod +x docker-compose
+```
+
+- **Modified PATH Varibles**
+
+
+   Type `cd` to return to the original directory and type ```nano .bashrc```, copy and paste the next at the end of the `.bashrc` file
+
+```bash
+export PATH="${HOME}/soft:${PATH}"
+```
+
+Type `source .bashrc`, now everything that is in `/soft` directory will be in the PATH then you can execute it everywhere.
+
+- **Add current user to docker group**
+
+```bash
+sudo usermod -aG docker $USER
+logout
+```
+
+Then logback to the VM.
+
 ## Reproduce EDA and Modeling Phase
 
 Go to the [1. eda_and_modeling](./1.%20eda_and_modeling/) directory open jupyter lab:
@@ -156,10 +194,14 @@ In the last run it can be seen the accuracy in the test set:
 - **accuracy test set:** 0.808
 
 ## Reproduce Monitoring Service
+To reproduce this section you can stop all the services started in the last section
 
+To start all required services to reproduce monitoring service go to [2. monitoring service](./2.%20monitoring_service/) directory and execute:
 
+```bash
+docker-compose up
+```
 
-# Hacer instrucciones hasta para instalar jupyter
 
 
 borrar mlruns y mldb
