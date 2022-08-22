@@ -8,6 +8,7 @@ import pandas as pd
 import requests
 
 df = pd.read_csv("test_set.csv")
+target_name = "Churn"
 data_target = df[target_name].tolist()
 data_features = df.drop(target_name, axis = 1).to_dict('records')
 

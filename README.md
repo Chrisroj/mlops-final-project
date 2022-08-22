@@ -127,6 +127,8 @@ It will split the [churn data](./0.%20data/WA_Fn-UseC_-Telco-Customer-Churn.csv)
 
 ### Docker
 
+In the root directory follow the next steps:
+
 - **Install Docker**:
 
 ```bash
@@ -181,7 +183,7 @@ Now type in the terminal(in the [1. eda_and_modeling](./1.%20eda_and_modeling/) 
 ```bash
 mlflow ui --backend-store-uri sqlite:///mlflow.db
 ```
-And run the [trainning_churn_model](./1.%20eda_and_modeling/trainning_churn_model.ipynb). This notebook build a scikit-learn pipeline to train a Random Forest Classfier and uses MLflow to track the experiments and register the best model, go to [localhost:5000](localhost:5000) to see all the runs in MLflow:
+And run the [trainning_churn_model](./1.%20eda_and_modeling/trainning_churn_model.ipynb). This notebook build a scikit-learn pipeline to train a Random Forest Classfier and uses MLflow to track the experiments and register the best model, go to [http://localhost:5000/](http://localhost:5000/) to see all the runs in MLflow:
 
 ![mlflow](./images/mlflow_runs.PNG)
 
@@ -202,20 +204,20 @@ To start all required services to reproduce monitoring service go to [2. monitor
 docker-compose up
 ```
 
+Now to simulate an online service run(inside the `churn-env`):
 
+```bash
+python send_data
+```
+To send data to the service. You can go to [http://localhost:3000/](http://localhost:3000/) and in user and password type `admin` you have to change the password but after that you can check the dashboard, go to dashboards section and select Evidently Data Drift Dashboard and you'll can see something like this:
 
-borrar mlruns y mldb
+![mlflow](./images/evidently.PNG)
 
+Now you can monitor the data drift of the curn model.
 
+**Note:** The model deployment code is containerized and could be deployed to cloud with others tools.
 
-Cosas a mejorar:
-- Usar el mismo environment para el eda, entrenamiento y la de web service
--  Poner preprocesamiento de target de churn(cuando cambio yes por 1 y no por 0) en otro script(tal vez el de send_data o evidently_service).
-- utilizar pipfile en evidently service y en docker-compose. Solo utilicé pipfile in prediction service
-- Usar terraform
-
-# Que mi proximo sea de predicción de bicis de la cdmx
-phase1-> results
-phase2-> results
-
-poner table of contents
+Things to improve:
+- Use pipenv always, even in with jupyter
+- Use terraform
+- Apply best practices
