@@ -16,7 +16,7 @@ To do that, in this project a classification model for churn is built, deployed 
 - Tracking model experiment with MLflow and using the registry.
 - Monitor data drift with evidently and grafana integration.
 - Use the cloud to develop the project.
-- 
+- containerize the deployment code
 
 ## Data Source
 Each row represents a customer, each column contains customer’s attributes described on the column Metadata.
